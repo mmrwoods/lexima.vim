@@ -249,6 +249,11 @@ g:lexima_accept_pum_with_enter			*g:lexima_accept_pum_with_enter*
 	" Always insert new line regardless if popup menu is visible
 	let g:lexima_accept_pum_with_enter = 0
 
+g:lexima_close_pum_with_escape			*g:lexima_close_pum_with_escape*
+	If it is 1, and |g:lexima_map_escape| is '<Esc>', enables <Esc> to be
+	used to close the completion menu when the |popup-menu| is visible.
+	default value: 0
+
 g:lexima_ctrlh_as_backspace			*g:lexima_ctrlh_as_backspace*
 	If it is 1, <C-h> can be used in the same manner as <BS>.
 	default value: 0

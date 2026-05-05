@@ -6,11 +6,8 @@ if exists('g:loaded_lexima')
 endif
 let g:loaded_lexima = 1
 
-
-if !exists('g:lexima_map_escape')
-  let g:lexima_map_escape = '<Esc>'
-endif
-
+let g:lexima_map_escape = get(g:, 'lexima_map_escape', '<Esc>')
+let g:lexima_close_pum_with_escape = get(g:, 'lexima_close_pum_with_escape', 0)
 
 function! s:setup_insmode()
   if get(b:, 'lexima_disabled', 0)
@@ -29,7 +26,9 @@ function! s:setup_insmode()
   if g:lexima_map_escape == '<Esc>' && !has('gui_running')
     inoremap <Esc><Esc> <Esc>
   endif
-  if g:lexima_map_escape !=# ''
+  if g:lexima_map_escape == '<Esc>' && g:lexima_close_pum_with_escape
+    inoremap <expr> <silent> <buffer> <nowait> <Esc> (pumvisible() ? "\<C-e>" : '<C-r>=lexima#insmode#escape()<CR><Esc>')
+  elseif g:lexima_map_escape !=# ''
     if v:version > 703 || (v:version == 703 && has("patch1261"))
       exe 'inoremap <silent> <buffer> <nowait> '.g:lexima_map_escape.' <C-r>=lexima#insmode#escape()<CR><Esc>'
     else
