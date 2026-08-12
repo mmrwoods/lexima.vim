@@ -18,11 +18,11 @@ function! lexima#endwise_rule#make()
 
   " ruby
   call add(rules, lexima#endwise_rule#make_rule('^\s*\%(module\|class\|unless\|for\|while\|until\|case\)\>\%(.*[^.:@$]\<end\>\)\@!.*\%#$', 'end', 'ruby', []))
-  call add(rules, lexima#endwise_rule#make_rule('^\s*\%(if\)\>\%(.*[^.:@$]\<end\>\)\@!.*\%#$', 'end', 'ruby', [], ['else', 'elsif']))
+  call add(rules, lexima#endwise_rule#make_rule('^\s*\%(if\|unless\)\>\%(.*[^.:@$]\<end\>\)\@!.*\%#$', 'end', 'ruby', [], ['else', 'elsif']))
   call add(rules, lexima#endwise_rule#make_rule('^\s*\%(def\)\>\%(.*[^.:@$]\<end\>\)\@!.*\%#$', 'end', 'ruby', [], ['rescue']))
   call add(rules, lexima#endwise_rule#make_rule('^\s*\%(begin\)\s*\%#$', 'end', 'ruby', [], ['rescue']))
   call add(rules, lexima#endwise_rule#make_rule('\%(^\s*#.*\)\@<!do\%(\s*|.*|\)\?\s*\%#$', 'end', 'ruby', []))
-  call add(rules, lexima#endwise_rule#make_rule('\<\%(if\|unless\)\>.*\%#$', 'end', 'ruby', 'rubyConditionalExpression'))
+  call add(rules, lexima#endwise_rule#make_rule('\<.*=.*\%(if\|unless\)\>.*\%#$', 'end', 'ruby', 'rubyConditionalExpression', ['else', 'elsif']))
 
   " elixir
   call add(rules, lexima#endwise_rule#make_rule('\%(^\s*#.*\)\@<!do\s*\%#$', 'end', 'elixir', [], ['rescue']))
