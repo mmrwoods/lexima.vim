@@ -61,6 +61,7 @@ Describe endwise rule
 
     Before each
       new | setf ruby
+      let g:ruby_indent_assignment_style = 'hanging'
     End
 
     It should input end word
@@ -160,6 +161,7 @@ Describe endwise rule
 
     Before all
       new | setf julia
+      setlocal formatoptions-=r
     End
 
     It should input end word
